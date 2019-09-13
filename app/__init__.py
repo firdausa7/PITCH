@@ -1,8 +1,14 @@
 from flask import Flask
 from config import Config
 from flask_bootstrap import Bootstrap
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+
+ # Initializing flask extensions
+
+db =SQLAlchemy(app)
 bootstrap = Bootstrap(app)
 
 def create_app():
