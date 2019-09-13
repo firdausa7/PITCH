@@ -8,13 +8,18 @@
     padding-top: 0;
 }
 .text{
-    font-weight :100;
-    font-size: 100px;
-    color :orange;
-    text-align: center;
     z-index:1;
+    font-weight :100;
+    font-size: 60px;
+    color :whitesmoke;
+    text-align: center;
+    text-shadow: 0 -3px 0 #333,
+      0 6px 8px rgba(0,0,0,.4),
+      0 9px 10px rgba(0,0,0,.15),
+      0 30px 10px rgba(0,0,0,.18),
+      0 15px 10px rgba(0,0,0,.21);
+    }
 
-  }
   .overlay{
     height: inherit;
     background-color: rgba(0, 0, 0, 0.5);
