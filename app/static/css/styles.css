@@ -1,0 +1,23 @@
+#cover{
+    background-image: url("../images/pitch.jpeg");
+    background-size: cover;
+    background-position: center;
+}
+#cover{
+    margin-top: 0;
+    padding-top: 0;
+}
+.text{
+    font-weight :100;
+    font-size: 100px;
+    color :orange;
+    text-align: center;
+    z-index:1;
+
+  }
+  .overlay{
+    height: inherit;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-size: cover;
+
+  }
