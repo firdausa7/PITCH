@@ -5,9 +5,7 @@ app = create_app
 manager = Manager(app)
 manager.add_command('runserver', Server(use_debugger=True))
 
-@Manager.shell
-def add_shell_context():
-    return{}
+
 
 
 if __name__ == "__main__":
