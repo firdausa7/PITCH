@@ -1,6 +1,5 @@
-from flask import render_template, request, redirect,url_for, abort, flash
+from flask import render_template, request, redirect, url_for, abort, flash
 from . import main
-from .forms import PitchForm, UpdateProfile, CommentForm
 from ..models import Pitch, User, Comment
 from flask_login import login_required, current_user
 from .. import db, photos
@@ -15,21 +14,21 @@ def index():
     pitches = Pitch.query.all()
 
     title = ''
-    return render_template('index.html', title = title, pitches=pitches)
+    return render_template('index.html', title=title, pitches=pitches)
 
 # VIEWING EACH SPECIFIC PROFILE
 @main.route('/user/<uname>')
 @login_required
 def profile(uname):
-    user = User.query.filter_by(username = uname).first()
+    user = User.query.filter_by(username=uname).first()
 
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user)
+    return render_template("profile/profile.html", user=user)
 
 # UPDATING PROFILE
-@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@main.route('/user/<uname>/update', methods=['GET', 'POST'])
 @login_required
 def update_profile(uname):
     user = User.query.filter_by(username=uname).first()
@@ -44,33 +43,33 @@ def update_profile(uname):
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('.profile',uname=user.username))
+        return redirect(url_for('.profile', uname=user.username))
 
-    return render_template('profile/update.html',form =form)
+    return render_template('profile/update.html', form=form)
 
 # UPDATING PICTURE
-@main.route('/user/<uname>/update/pic',methods= ['POST'])
+@main.route('/user/<uname>/update/pic', methods=['POST'])
 @login_required
 def update_pic(uname):
-    user = User.query.filter_by(username = uname).first()
+    user = User.query.filter_by(username=uname).first()
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
-    return redirect(url_for('main.profile',uname=uname))
+    return redirect(url_for('main.profile', uname=uname))
 
 # ADDING A NEW PITCH
-@main.route('/pitch/new', methods=['GET','POST'])
+@main.route('/pitch/new', methods=['GET', 'POST'])
 @login_required
 def new_pitch():
     form = PitchForm()
 
     if form.validate_on_submit():
 
-        title=form.title.data
-        content=form.content.data
-        category_id=form.category_id.data
+        title = form.title.data
+        content = form.content.data
+        category_id = form.category_id.data
         pitch = Pitch(title=title,
                       content=content,
                       category_id=category_id,
@@ -82,7 +81,7 @@ def new_pitch():
         # pitch.save_pitch(pitch)
         print('firdausa')
         flash('Your pitch has been created!', 'success')
-        return redirect(url_for('main.single_pitch',id=pitch.id))
+        return redirect(url_for('main.single_pitch', id=pitch.id))
 
     return render_template('newpitch.html', title='New Post', pitch_form=form, legend='New Post')
 
@@ -90,7 +89,8 @@ def new_pitch():
 @main.route('/pitch/new/<int:id>')
 def single_pitch(id):
     pitch = Pitch.query.get(id)
-    return render_template('singlepitch.html',pitch = pitch)
+    return render_template('singlepitch.html', pitch=pitch)
+
 
 @main.route('/allpitches')
 def pitch_list():
@@ -102,7 +102,7 @@ def pitch_list():
 
 
 # VIEWING A PITCH WITH COMMENTS AND COMMENTFORM
-@main.route('/pitch/<int:pitch_id>/',methods=["GET","POST"])
+@main.route('/pitch/<int:pitch_id>/', methods=["GET", "POST"])
 def pitch(pitch_id):
     pitch = Pitch.query.get(pitch_id)
     form = CommentForm()
@@ -116,7 +116,6 @@ def pitch(pitch_id):
                                     user=current_user)
         # new_post_comment.save_post_comments()
 
-
         db.session.add(new_pitch_comment)
         db.session.commit()
     comments = Comment.query.all()
@@ -126,33 +125,35 @@ def pitch(pitch_id):
                            comments=comments)
 
 # ADDING A NEW COMMENT TO A PITCH
-@main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
+@main.route('/pitch/comment/new/<int:id>', methods=['GET', 'POST'])
 @login_required
 def new_comment(id):
     '''
     view category that returns a form to create a new comment
     '''
     form = CommentForm()
-    pitch = Pitch.query.filter_by(id = id).first()
+    pitch = Pitch.query.filter_by(id=id).first()
 
     if form.validate_on_submit():
         title = form.title.data
         comment = form.comment.data
 
         # comment instance
-        new_comment = Comment(pitch_id = pitch.id, post_comment = comment, title=title, user = current_user)
+        new_comment = Comment(
+            pitch_id=pitch.id, post_comment=comment, title=title, user=current_user)
 
         # save comment
         new_comment.save_comment()
 
-        return redirect(url_for('.pitches', id = pitch.id ))
+        return redirect(url_for('.pitches', id=pitch.id))
 
     title = f'{pitch.title} comment'
-    return render_template('newcomment.html', title = title, comment_form = form, pitch = pitch, )
+    return render_template('newcomment.html', title=title, comment_form=form, pitch=pitch, )
 
 # UPDATING A PITCH
 
-@main.route('/pitch/<int:pitch_id>/update', methods=['GET','POST'])
+
+@main.route('/pitch/<int:pitch_id>/update', methods=['GET', 'POST'])
 @login_required
 def update_pitch(pitch_id):
     pitch = Pitch.query.get_or_404(pitch_id)
@@ -186,11 +187,11 @@ def delete_pitch(pitch_id):
     return redirect(url_for('main.pitches'))
 
 # VIEWING A SPECIFIC PITCH
-@main.route("/view/<id>", methods=["GET","POST"])
+@main.route("/view/<id>", methods=["GET", "POST"])
 def view_pitch(id):
     pitch = Pitch.query.get(id)
     if request.args.get("vote"):
-       pitch.likes = pitch.likes + 1
-       pitch.save_pitch()
-       return redirect("/view/{pitch_id}".format(pitch_id=id))
-    return render_template('viewpitch.html',pitch = pitch)
+        pitch.likes = pitch.likes + 1
+        pitch.save_pitch()
+        return redirect("/view/{pitch_id}".format(pitch_id=id))
+    return render_template('viewpitch.html', pitch=pitch)
