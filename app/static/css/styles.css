@@ -36,7 +36,7 @@
     height: 20px;
   }
   #login{
-    background-image: url("../images/coffe.jpeg");
+    background-image: url("../images/skull.jpeg");
     background-size: cover;
     background-position: center;
     padding-top: 20px;
@@ -45,4 +45,9 @@
   }
   #ac{
     color: antiquewhite;
+  }
+  #log{
+    font-family: 'Josefin Sans', sans-serif;
+    color: blue;
+    font-weight: 200;
   }
