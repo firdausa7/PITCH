@@ -4,7 +4,7 @@
     background-position: center;
 }
 #cover{
-    margin-top: 0;
+    margin-top: 0px;
     padding-top: 0;
 }
 .text{
@@ -26,4 +26,23 @@
     background-color: rgba(0, 0, 0, 0.5);
     background-size: cover;
 
+  }
+  #kiss{
+    background-color:blue;
+    background-size: cover;
+  }
+  #nav{
+    margin-bottom: 0px;
+    height: 20px;
+  }
+  #login{
+    background-image: url("../images/coffe.jpeg");
+    background-size: cover;
+    background-position: center;
+    padding-top: 20px;
+    margin-top: 50px;
+
+  }
+  #ac{
+    color: antiquewhite;
   }

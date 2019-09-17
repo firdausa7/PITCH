@@ -6,8 +6,8 @@ class PitchForm(FlaskForm):
     title = StringField('Pitch title')
     category_id = SelectField('Pitch Category', choices=[('product', 'product'),
                                                       ('service', 'service'),
-                                                      ('fundraising', 'fundraising'),
-                                                      ('business', 'business')])
+                                                      ('love', 'love'),
+                                                      ('tech', 'tech')])
     content = TextAreaField('Post Of The Pitch')
     submit = SubmitField('Submit')
 
