@@ -3,7 +3,7 @@
 ## Description
 This a web application that allows users to submit a pitch. Also, other users are allowed to vote on submitted pitches and leave comments to give their feedback on the pitches. For a user to submit a pitch, vote on a pitch or give feedback on a pitch they need to have an account.
 ## Screenshot
-<img src="../PITCH/app/static/images/xxxx.png">
+<img src="https://github.com/firdausa7/PITCH/blob/master/app/static/images/xxxx.png?raw=true" width="1000">
 
 ## User Stories
 As a user I would like:
