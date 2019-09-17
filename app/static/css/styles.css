@@ -51,3 +51,10 @@
     color: blue;
     font-weight: 200;
   }
+  #reg{
+    background-image: url("../images/stairs.jpeg");
+    background-size: cover;
+    background-position: center;
+    padding-top: 20px;
+    margin-top: 50px;
+  }
