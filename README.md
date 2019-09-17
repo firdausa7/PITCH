@@ -3,7 +3,7 @@
 ## Description
 This a web application that allows users to submit a pitch. Also, other users are allowed to vote on submitted pitches and leave comments to give their feedback on the pitches. For a user to submit a pitch, vote on a pitch or give feedback on a pitch they need to have an account.
 ## Screenshot
-<img src="/home/firdausa/Desktop/PITCH/app/static/images/xxxx.png">
+<img src="../PITCH/app/static/images/xxxx.png">
 
 ## User Stories
 As a user I would like:
@@ -22,7 +22,7 @@ To get the code..
   ```
 2. Move to the folder and install requirements
   ```bash
-  cd pitch-world
+  cd PITCH
   pip install -r requirements.txt
   ```
 3. Exporting Configurations
