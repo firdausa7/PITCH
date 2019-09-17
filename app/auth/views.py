@@ -19,10 +19,10 @@ def register():
 
         db.session.add(user)
         db.session.commit()
+
         flash('You have successfully registered. You may now login!')
 
-        mail_message("Welcome to pitch", "email/welcome_user",
-                     user.email, user=user)
+        mail_message("Welcome to pitch","email/welcome_user", user.email, user=user)
 
         title = "New Account"
         return redirect(url_for('auth.login'))

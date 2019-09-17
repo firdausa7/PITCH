@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for, abort, flash
 from . import main
+from .forms import CommentForm, PitchForm, UpdateProfile, CategoryForm
 from ..models import Pitch, User, Comment
 from flask_login import login_required, current_user
 from .. import db, photos
@@ -13,7 +14,7 @@ def index():
     # category = Category.get_categories()
     pitches = Pitch.query.all()
 
-    title = ''
+    title = 'WELCOME to PITCH'
     return render_template('index.html', title=title, pitches=pitches)
 
 # VIEWING EACH SPECIFIC PROFILE
@@ -80,7 +81,7 @@ def new_pitch():
 
         # pitch.save_pitch(pitch)
         print('firdausa')
-        flash('Your pitch has been created!', 'success')
+        flash('Your pitch has been created!', 'successfully')
         return redirect(url_for('main.single_pitch', id=pitch.id))
 
     return render_template('newpitch.html', title='New Post', pitch_form=form, legend='New Post')

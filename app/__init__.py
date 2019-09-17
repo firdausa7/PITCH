@@ -26,7 +26,7 @@ def create_app(config_name):
 
 
     # configure UploadSet
-    # configure_uploads(app, photos)
+    configure_uploads(app, photos)
 
     # Initializing flask extensions
     bootstrap.init_app(app)
