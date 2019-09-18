@@ -1,0 +1,5 @@
+Dear {{user.username}}
+Welcome to Pitch.
+Feel free to pitch your brilliant idea(s) with us.
+
+Good to have you.
